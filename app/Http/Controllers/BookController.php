@@ -23,53 +23,24 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        //validate data
-        /*$validator = Validator::make($request->all(), [
-            'title'     => 'required',
-            'author'   => 'required',
-            'description'   => 'required',
-        ],
-            [
-                'title.required' => 'Masukkan Title !',
-                'author.required' => 'Masukkan Author !',
-                'description.required' => 'Masukkan Description !',
-            ]
-        );
+        
+        $book = Book::create($request->validated());
 
-        if($validator->fails()) {
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Silahkan Isi Bidang Yang Kosong',
-                'data'    => $validator->errors()
-            ],401);
-
-        } else {
-
-            $post = Post::create([
-                'title'     => $request->input('title'),
-                'author'   => $request->input('author'),
-                'description'   => $request->input('description')
-            ]);
-
-            if ($post) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Post Berhasil Disimpan!',
-                ], 200);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Post Gagal Disimpan!',
-                ], 401);
-            }
-        }*/
-        $book = Book::create($request->all());
-
-        return response()->json($book, 201);
+        return $book;
     }
+
+    /*public function create(request $request){
+        $book = new Book();
+        $book->title = $request->judul;
+        $book->author = $request->penulis;
+        $book->description = $request->description;
+        $book->read = $request->read;
+        $book->save();
+
+        return "Data Tersimpan";
+    }*/
 
     /**
      * Display the specified resource.
@@ -79,7 +50,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return $book;
     }
 
     /**

@@ -28,6 +28,7 @@ class StoreBookRequest extends FormRequest
         'author' => 'required',
         'description' => 'required',
         'read' => 'required',
+        'link' => 'required',
         ];
     }
 }

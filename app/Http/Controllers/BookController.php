@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBookRequest;
 
 class BookController extends Controller
 {
@@ -23,6 +24,7 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(StoreBookRequest $request)
     {
         
@@ -31,16 +33,16 @@ class BookController extends Controller
         return $book;
     }
 
-    /*public function create(request $request){
+    public function create(request $request){
         $book = new Book();
         $book->title = $request->judul;
         $book->author = $request->penulis;
         $book->description = $request->description;
-        $book->read = $request->read;
+        $book->link = $request->link;
         $book->save();
 
         return "Data Tersimpan";
-    }*/
+    }
 
     /**
      * Display the specified resource.
@@ -62,7 +64,8 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+     $book->update($request->validated());
+     return $book;   
     }
 
     /**
@@ -73,6 +76,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return 'Data berhasil dihapus';
     }
 }

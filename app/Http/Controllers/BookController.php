@@ -54,7 +54,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
     
-        return $book;
+        return new BookResource($book);
     }
 
     /**
@@ -67,7 +67,7 @@ class BookController extends Controller
     public function update(StoreBookRequest $request, Book $book)
     {
      $book->update($request->validated());
-     return $book;   
+     return new BookResource($book);   
     }
 
     /**

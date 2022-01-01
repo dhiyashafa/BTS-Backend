@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBookRequest;
+use App\Http\Resources\BookResource;
 
 class BookController extends Controller
 {
@@ -15,7 +16,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::all();
+        return BookResource::collection(Book::all());
     }
 
     /**
@@ -33,7 +34,7 @@ class BookController extends Controller
         return $book;
     }
 
-    public function create(request $request){
+    /*public function create(request $request){
         $book = new Book();
         $book->title = $request->judul;
         $book->author = $request->penulis;
@@ -42,7 +43,7 @@ class BookController extends Controller
         $book->save();
 
         return "Data Tersimpan";
-    }
+    }*/
 
     /**
      * Display the specified resource.
@@ -52,6 +53,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+    
         return $book;
     }
 

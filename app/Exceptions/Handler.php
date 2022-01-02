@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -10,7 +11,7 @@ class Handler extends ExceptionHandler
     /**
      * A list of the exception types that are not reported.
      *
-     * @var array<int, class-string<Throwable>>
+     * @var string[]
      */
     protected $dontReport = [
         //
@@ -19,23 +20,12 @@ class Handler extends ExceptionHandler
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
-     * @var array<int, string>
-     */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
-
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
+     * @var string[]
      */
     public function register()
     {
         $this->renderable(function (NotFoundHttpException $e) {
-            return response()->json(['message' => 'Data not found'], 404);
+            return response()->json(['message' => 'Object not found'], 404);
         });
     }
 }
